@@ -1,0 +1,25 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Source and generated data
+data/raw/
+data/raw_2026/
+cache/
+tableau/*.csv
+tableau/*.xlsx
+
+# Legacy experiments (repro files kept local only)
+archive/
+
+# Jupyter / Python
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# OS
+.DS_Store

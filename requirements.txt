@@ -1,0 +1,19 @@
+# Tested with Python 3.10.19
+numpy==2.2.6
+pandas==2.3.3
+openpyxl==3.1.5
+
+# Database and configuration
+SQLAlchemy==2.0.48
+PyMySQL==1.2.0
+python-dotenv==1.2.2
+
+# Notebook and visualization
+ipykernel==6.31.0
+jupyterlab==4.5.3
+plotly==6.5.2
+
+# Machine learning
+scikit-learn==1.7.2
+lightgbm==4.6.0
+xgboost==3.1.3
