@@ -390,6 +390,38 @@ FROM aggregated AS a
 CROSS JOIN thresholds AS t
 ORDER BY a.airport_name_raw, t.threshold_minutes;
 
+-- name: departure_time_basis_check
+-- 15분 시간 지연율이 상태 지연율보다 크게 높은 원인을 점검한다.
+-- 항공사가 정시로 신고한 편(상태 '출발' + 예상시각 = 계획시각)만 남겨
+-- 실제-계획 시간차를 본다. 이 부분집합의 시간차는 정시성이 아니라
+-- 계획시각과 실제출발시각의 기준 차이를 반영한다고 보고 해석에 사용한다.
+WITH declared_ontime AS (
+    SELECT airport_name_raw,
+           raw_gap_minutes,
+           ROW_NUMBER() OVER (PARTITION BY airport_name_raw
+                              ORDER BY raw_gap_minutes) AS gap_rank,
+           COUNT(*) OVER (PARTITION BY airport_name_raw) AS gap_count
+    FROM v_flight_analysis
+    WHERE is_passenger
+      AND is_international = TRUE
+      AND is_denominator
+      AND is_time_calculable
+      AND status_raw = '출발'
+      AND scheduled_time_raw = estimated_time_raw
+)
+SELECT airport_name_raw,
+       MAX(gap_count) AS declared_ontime_rows,
+       ROUND(AVG(CASE WHEN gap_rank IN (FLOOR((gap_count + 1) / 2),
+                                        CEILING((gap_count + 1) / 2))
+                      THEN raw_gap_minutes END), 1)
+           AS median_actual_minus_scheduled,
+       ROUND(AVG(raw_gap_minutes), 1) AS avg_actual_minus_scheduled,
+       ROUND(SUM(raw_gap_minutes >= 15) / MAX(gap_count), 4)
+           AS gap_at_least_15_rate
+FROM declared_ontime
+GROUP BY airport_name_raw
+ORDER BY airport_name_raw;
+
 -- name: midnight_negative_gap_profile
 -- 음수 원시 시간차를 크기별로 나눠 자정 넘김 후보와 조기 출발 가능성을 분리해 본다.
 SELECT airport_name_raw, COALESCE(status_raw, '(NULL)') AS status_raw,
