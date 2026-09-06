@@ -62,7 +62,7 @@ AirPortal 공개 데이터로 국제선 수요와 운항 안정성을 분석하�
 
 ![02 수요 전망 & 액션 대시보드](tableau/dashboard_02_forecast.png)
 
-- **대시보드 파일**: `tableau/국제선_수요예측_대시보드.twbx` (데이터를 내장해 단독으로 열린다)
+- **대시보드 파일**: `tableau/국제선 목적지 수요 예측 및 프로모션 전략.twbx` (데이터를 내장해 단독으로 열린다)
 - **입력 데이터**: `tableau/export_tableau.py`로 재생성하며, 대시보드는 CSV 6종(`country_monthly`·`destination_monthly`·`forecast_monthly`·`market_monthly`·`model_performance`·`promotion_candidates`)에 연결한다.
 
 ---
