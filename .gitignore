@@ -13,6 +13,10 @@ tableau/*.xlsx
 # Legacy experiments (repro files kept local only)
 archive/
 
+# Local portfolio/Notion exports
+notion_img/
+scripts/export_portfolio_charts.py
+
 # Jupyter / Python
 .ipynb_checkpoints/
 __pycache__/
