@@ -7,10 +7,6 @@
 data/raw/
 data/raw_2026/
 cache/
-tableau/*.csv
-!tableau/forecast_destination_monthly.csv
-!tableau/promotion_candidates.csv
-tableau/*.xlsx
 
 # Legacy experiments (repro files kept local only)
 archive/

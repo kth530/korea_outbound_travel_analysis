@@ -1,4 +1,4 @@
-"""Tableau 출력에서 사용하는 목적지 표시명·국가·지역 보조 함수."""
+"""목적지 표시명·국가·지역을 붙이는 보조 함수."""
 
 from pathlib import Path
 
@@ -40,7 +40,7 @@ DISPLAY_NAME_MAP = {
 
 
 def destination_reference() -> pd.DataFrame:
-    """DB 목적지명과 대시보드 표시명·국가·지역을 1행으로 반환한다."""
+    """DB 목적지명과 표시명·국가·지역을 1행으로 반환한다."""
     reference = pd.read_csv(DESTINATION_REFERENCE)
     reference = reference.rename(
         columns={
@@ -54,7 +54,7 @@ def destination_reference() -> pd.DataFrame:
 
 
 def add_destination_labels(df: pd.DataFrame, source_col: str) -> pd.DataFrame:
-    """목적지 키를 보존하면서 Tableau용 표시명·국가·지역을 붙인다."""
+    """목적지 키를 보존하면서 표시명·국가·지역을 붙인다."""
     result = df.copy()
     result["목적지_DB"] = result[source_col]
     result["목적지"] = result[source_col].replace(DISPLAY_NAME_MAP)

@@ -62,6 +62,6 @@ python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kern
 python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.kernel_name=ml_env notebooks/06_postproject_validation.ipynb
 ```
 
-06 실행에는 저장소의 `data/raw_followup_2026/airportal/transport_statistics/route/`에 있는 8·9월 여객·운항 Excel과 고정된 `tableau/forecast_destination_monthly.csv`가 필요하다. 원자료 조회 조건과 해시는 [사후 자료 기록](data/raw_followup_2026/source_manifest.json)에 있다.
+06 실행에는 저장소의 `data/raw_followup_2026/airportal/transport_statistics/route/`에 있는 8·9월 여객·운항 Excel과 고정된 `outputs/forecast_destination_monthly_2026_07.csv`가 필요하다. 원자료 조회 조건과 해시는 [사후 자료 기록](data/raw_followup_2026/source_manifest.json)에 있다.
 
-[Ridge 월별 예측 CSV](tableau/forecast_destination_monthly.csv)와 [검토 후보 CSV](tableau/promotion_candidates.csv)는 7월 기준 예측을 고정한 저장 산출물이다. 06은 이 예측을 8·9월 실적과 비교한다. 모델별 계산과 후보 선정 과정은 05에, 이전 00–05 노트북과 대시보드 파일은 Git 이력에 남아 있다.
+[Ridge 월별 예측 CSV](outputs/forecast_destination_monthly_2026_07.csv)와 [검토 후보 CSV](outputs/promotion_candidates_2026_07.csv)는 7월 기준 예측을 고정한 저장 산출물이다. 06은 이 예측을 8·9월 실적과 비교한다. 모델별 계산과 후보 선정 과정은 05에, 이전 00–05 노트북과 대시보드 파일은 Git 이력에 남아 있다.

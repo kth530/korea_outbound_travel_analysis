@@ -78,7 +78,7 @@ def build(source: Path | pd.DataFrame, output: Path,
     if isinstance(archived_candidates, pd.DataFrame):
         archived = archived_candidates.copy()
     else:
-        archived_path = archived_candidates or ROOT / "tableau/promotion_candidates.csv"
+        archived_path = archived_candidates or ROOT / "outputs/promotion_candidates_2026_07.csv"
         archived = pd.read_csv(archived_path, encoding="utf-8-sig")
     assert set(old["목적지_DB"]) == set(archived["목적지_DB"])
     assert np.allclose(old.set_index("목적지_DB").loc[archived["목적지_DB"], "예측수요"], archived["2026_8_12_예측수요"])
@@ -98,8 +98,8 @@ def build(source: Path | pd.DataFrame, output: Path,
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source", type=Path, default=ROOT / "tableau/forecast_destination_monthly.csv")
-    parser.add_argument("--output", type=Path, default=ROOT / "tableau")
+    parser.add_argument("--source", type=Path, default=ROOT / "outputs/forecast_destination_monthly_2026_07.csv")
+    parser.add_argument("--output", type=Path, default=ROOT / "outputs")
     args = parser.parse_args()
     result = build(args.source, args.output)
     for name, df in result.items():
