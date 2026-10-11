@@ -5,7 +5,7 @@
 
 -- name: create_v_model_destination_monthly_all
 -- 목적지 수요 예측의 공통 월 패널 원천. 2023~2025와 2026을 동일 집계 단위로 결합한다.
--- 기존 홀드아웃 파이프라인(archive)에 있던 정의를 로직 변경 없이 05로 이관한다(멱등).
+-- 2023~2025 노선 뷰와 2026 노선 뷰를 같은 목적지×월 단위로 결합한다.
 CREATE OR REPLACE VIEW v_model_destination_monthly_all AS
 SELECT period_ym,
        destination_airport_std AS destination_canonical_std,
@@ -110,7 +110,7 @@ GROUP BY seasonal_label_2024, seasonal_label_2025
 ORDER BY label_2024, label_2025;
 
 -- name: model_view_parity_signature
--- 이관 전후 대조용 서명. 이관 DDL이 기존 뷰와 동일 결과인지 확인한다.
+-- 목적지×월 결합 뷰의 행·기간·합계 정합성 서명.
 SELECT COUNT(*)                                   AS rows_,
        COUNT(DISTINCT destination_canonical_std)  AS destinations,
        MIN(period_ym)                             AS min_period,

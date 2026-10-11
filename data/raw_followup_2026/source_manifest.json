@@ -1,0 +1,43 @@
+{
+  "source_page": "https://airportal.go.kr/stats/transport/chartDetail5.do",
+  "source_endpoint": "https://airportal.go.kr/stats/transport/getDetailedAirTransportStats3TimeExcel.do",
+  "retrieved_at_kst": "2026-10-11T04:38:42+09:00",
+  "query": {
+    "last_yearmonth": "202608",
+    "this_yearmonth": "202609",
+    "di_gubun": "I",
+    "arvl_type": "D",
+    "sn_gubun": "total",
+    "pass_gubun": "4",
+    "carge_gubun": "total",
+    "pyn_gubun": "total",
+    "airport_gubun": "total",
+    "forreign_airport_gubun": "total"
+  },
+  "scope": "2026-08~2026-09, 국제선, 출발, 유임+환승여객, 노선별 시계열, 전체 운항",
+  "july_parity": "같은 조회 조건의 2026-07 재다운로드 자료가 기존 여객·운항 Excel 각각 305행 전부와 일치",
+  "files": [
+    {
+      "metric": "passenger",
+      "path": "airportal/transport_statistics/route/route_passenger_2026_08_09.xlsx",
+      "statType": 1,
+      "sha256": "957772c5a0e6eb66d5e0bd238f1beabb95c6b1aaa6b54e690f3d06d7664abe5e",
+      "excel_rows": 607,
+      "monthly_totals": {
+        "2026-08": 4564311,
+        "2026-09": 4131638
+      }
+    },
+    {
+      "metric": "operations",
+      "path": "airportal/transport_statistics/route/route_operations_2026_08_09.xlsx",
+      "statType": 3,
+      "sha256": "6968721da7af6181bd6267f501742e5be09b939c9bee9dad7e106cc9b11512e7",
+      "excel_rows": 607,
+      "monthly_totals": {
+        "2026-08": 25719,
+        "2026-09": 24870
+      }
+    }
+  ]
+}
