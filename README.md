@@ -24,7 +24,7 @@
 - **기간 구분:** 2023–2025년은 관측 수요 분석과 모델 학습, 2025년 1–7월은 Rolling Validation, 2026년 1–7월은 선택 모델의 Fixed Test에 사용했다. 2026년 7월 기준으로 8–12월을 예측하고, 이후 확보한 8–9월 실적으로 사후 오차를 확인했다.
 - **예측 대상:** 2026년 7월 기준 관측 이력이 충분한 **169개 목적지**다. 275곳은 관측된 전체 목적지 수이며, 169곳은 예측과 후보 검토에 사용한 집합이다.
 
-Excel 적재, 국제선 판별과 목적지 이름 표준화는 [02 데이터 준비](notebooks/02_data_preparation.ipynb)와 [SQL](sql/README.md)에, 예측 기준월마다 사용할 수 있는 정보로 피처를 만드는 과정은 [05 모델링](notebooks/05_modeling_validation.ipynb)에 담았다.
+Python에서 Excel 품질 점검·국제선 판별·목적지 이름 표준화·목적지×월 집계를 마친 뒤 MySQL에 적재한다. 절차는 [02 데이터 준비](notebooks/02_data_preparation.ipynb)와 [ETL 코드](scripts/route_etl.py), 저장·조회 구조는 [SQL](sql/README.md)에 담았다. 예측 기준월마다 사용할 수 있는 정보로 피처를 만드는 과정은 [05 모델링](notebooks/05_modeling_validation.ipynb)에 있다.
 
 ---
 
@@ -70,12 +70,12 @@ Validation WAPE가 가장 낮은 **Ridge 잔차 보정 모델**을 선택했다.
 | 자료 | 내용 |
 |---|---|
 | [01 문제 정의·가설](notebooks/01_problem_hypothesis.md) | 업무 질문과 두 가설 |
-| [02 데이터 준비](notebooks/02_data_preparation.ipynb) | Excel 적재, 품질 점검, 국제선·목적지 표준화 |
+| [02 데이터 준비](notebooks/02_data_preparation.ipynb) | Excel 품질 점검, Python ETL, MySQL 적재·정합성 확인 |
 | [03 데이터 개요](notebooks/03_data_overview.ipynb) | 시장·목적지·운항 자료의 단위와 기간 |
 | [04 EDA·가설 판단](notebooks/04_eda_validation.ipynb) | 인기·성장·계절성의 비교와 결론 |
 | [05 모델링·후보](notebooks/05_modeling_validation.ipynb) | 모델 선택·검증, 미래 예측과 후보 선정 |
 | [06 사후 검증](notebooks/06_postproject_validation.ipynb) | 2026년 8·9월 예측과 실적의 오차 |
-| [SQL 기준본](sql/README.md) | 적재·전처리·집계 뷰와 실행 순서 |
+| [SQL 조회 계층](sql/README.md) | ETL 테이블, 검산 쿼리, 분석용 읽기 뷰 |
 
 재현에는 MySQL, Python 3.10, [환경 변수 예시](.env.example)를 참고한 접속 정보, AirPortal에서 내려받은 2023–2025년 및 2026년 1–7월 노선별 여객·운항 Excel이 필요하다. 두 원자료 디렉터리 `data/raw/`와 `data/raw_2026/`는 공개 저장소에서 제외했다. 8–9월 사후 검증 자료와 조회 조건은 [자료 기록](data/raw_followup_2026/source_manifest.json)에 포함되어 있다.
 
